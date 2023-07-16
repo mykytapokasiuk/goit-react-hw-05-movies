@@ -1,0 +1,15 @@
+.header {
+    display: flex;
+    padding: 5px 15px;
+    background-color: rgb(194, 180, 163);
+    box-shadow: 3px 3px 5px 0px #000000;
+}
+
+a {
+    padding: 0 10px;
+    text-decoration: none;
+}
+
+.main {
+    padding-top: 20px;
+}
