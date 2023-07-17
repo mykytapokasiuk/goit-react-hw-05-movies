@@ -10,15 +10,19 @@ const App = () => {
     <div>
       <header className={css.header}>
         <nav>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/movies">Movies</NavLink>
+          <NavLink className={css.navLink} to="/">
+            Home
+          </NavLink>
+          <NavLink className={css.navLink} to="/movies">
+            Movies
+          </NavLink>
         </nav>
       </header>
       <main className={css.main}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/movies" element={<Movies />} />
-          <Route path="/movies/:movieId" element={<MovieDetails />} />
+          <Route path="/movies/:movieId/*" element={<MovieDetails />} />
         </Routes>
       </main>
     </div>

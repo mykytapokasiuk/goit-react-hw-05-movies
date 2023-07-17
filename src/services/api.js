@@ -26,4 +26,18 @@ const getMovieDetails = async movie_id => {
   return data;
 };
 
-export { getTrendingMovies, getMovieDetails };
+/**
+ *  Gets cast information for a movie page
+ * @function getMovieCredits
+ * @param {number} id
+ * @returns {Promise} Promise
+ */
+const getMovieCredits = async movie_id => {
+  const { data } = await axios.get(
+    `${params.url}movie/${movie_id}/credits?api_key=${params.key}`
+  );
+  // console.log(data);
+  return data;
+};
+
+export { getTrendingMovies, getMovieDetails, getMovieCredits };
