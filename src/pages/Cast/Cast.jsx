@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMovieCredits } from 'services/api';
 import Loader from 'components/Loader/Loader';
+import no_photo from '../../images/no_photo.jpg';
 import css from './Cast.module.css';
 
 const Cast = () => {
@@ -29,6 +30,7 @@ const Cast = () => {
   return (
     <div className={css.container}>
       {isLoading && <Loader />}
+      <h2 className={css.castTitle}>Cast</h2>
       <ul className={css.castList}>
         {movieCredits.length > 0 &&
           movieCredits.slice(0, 10).map(actor => {
@@ -36,13 +38,26 @@ const Cast = () => {
               <li key={actor.id} className={css.castListItem}>
                 <img
                   className={css.castItemImg}
-                  src={`https://image.tmdb.org/t/p/w200/${actor.profile_path}`}
+                  src={
+                    actor.profile_path
+                      ? `https://image.tmdb.org/t/p/w200/${actor.profile_path}`
+                      : no_photo
+                  }
                   alt={actor.name}
                 />
                 <div className={css.actorDetails}>
                   <p className={css.actorName}>{actor.name}</p>
                   <p className={css.actorCharacter}>
-                    Character: {actor.character}
+                    {actor.character ? (
+                      <span>
+                        Character:{' '}
+                        <span className={css.characterColor}>
+                          {actor.character}
+                        </span>
+                      </span>
+                    ) : (
+                      ''
+                    )}
                   </p>
                 </div>
               </li>

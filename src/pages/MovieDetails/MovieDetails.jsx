@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link, NavLink, Route, Routes, useParams } from 'react-router-dom';
 import { getMovieDetails } from 'services/api';
-import css from './MovieDetails.module.css';
 import Cast from 'pages/Cast/Cast';
 import Reviews from 'pages/Reviews/Reviews';
 import Loader from 'components/Loader/Loader';
+import coming_soon from '../../images/coming_soon.jpg';
+import css from './MovieDetails.module.css';
 
 const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState(null);
@@ -40,7 +41,11 @@ const MovieDetails = () => {
           <div className={css.movieContainer}>
             <img
               className={css.poster}
-              src={`https://image.tmdb.org/t/p/w300/${movieDetails.poster_path}`}
+              src={
+                movieDetails.poster_path
+                  ? `https://image.tmdb.org/t/p/w300/${movieDetails.poster_path}`
+                  : coming_soon
+              }
               alt={movieDetails.title}
             />
             <div className={css.detailsContainer}>

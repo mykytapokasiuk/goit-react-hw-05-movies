@@ -25,6 +25,7 @@ const HomePage = () => {
 
   return (
     <div className={css.container}>
+      <h1 className={css.trandingMoviesTitle}>Trending movies</h1>
       {isLoading && <Loader />}
       <ul className={css.movieList}>
         {movies.map(movie => {

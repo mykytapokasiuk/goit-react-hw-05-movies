@@ -31,7 +31,6 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    padding: 0 15px;
     margin-top: 20px;
 }
 
@@ -64,11 +63,16 @@
     display: flex;
     flex-direction: column;
     margin-top: 10px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.75);
+}
+
+.detailsRating>span {
+    color: rgb(255, 166, 0);
 }
 
 .detailsOverview {
     composes: detailsRating;
-    max-width: 500px;
+    max-width: 600px;
 }
 
 .detailsGenres {
@@ -86,7 +90,7 @@
 
 
 .addInfoContainer {
-    padding: 20px 15px;
+    padding: 20px 0;
 }
 
 .linkContainer {

@@ -1,5 +1,14 @@
 .container {
-    padding: 0 15px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 0 30px;
+}
+
+.castTitle {
+    margin-bottom: 20px;
+    letter-spacing: 0.02em;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.75);
 }
 
 .castList {
@@ -15,6 +24,8 @@
 }
 
 .castItemImg {
+    width: 200px;
+    height: 300px;
     border-radius: 5px;
     box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
 }
@@ -22,7 +33,10 @@
 .actorDetails {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 5px;
+    text-align: center;
+    max-width: 200px;
     margin-top: 10px;
 }
 
@@ -31,4 +45,19 @@
     font-weight: 600;
     letter-spacing: 0.05em;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.75);
+}
+
+.actorCharacter {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.75);
+}
+
+.actorCharacter>span {
+    color: rgb(255, 166, 0);
+}
+
+.characterColor {
+    color: rgb(0, 0, 0);
 }
