@@ -2,7 +2,7 @@ import axios from 'axios';
 import params from './utils.js';
 
 /**
- *  Gets array of objects from server
+ *  Gets trending movies from server
  * @function getTrendingMovies
  * @returns {Promise} Promise
  */
@@ -52,4 +52,23 @@ const getMovieReviews = async movie_id => {
   return data;
 };
 
-export { getTrendingMovies, getMovieDetails, getMovieCredits, getMovieReviews };
+/**
+ *  Gets reviews for a movie page
+ * @function getMovies
+ * @param {string} search_query
+ * @returns {Promise} Promise
+ */
+const getMovies = async search_query => {
+  const { data } = await axios.get(
+    `${params.url}search/movie?api_key=${params.key}&query=${search_query}&include_adult=false`
+  );
+  return data;
+};
+
+export {
+  getTrendingMovies,
+  getMovieDetails,
+  getMovieCredits,
+  getMovieReviews,
+  getMovies,
+};

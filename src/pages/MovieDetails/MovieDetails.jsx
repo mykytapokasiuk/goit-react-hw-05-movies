@@ -1,5 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { Link, NavLink, Route, Routes, useParams } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react';
+import {
+  Link,
+  NavLink,
+  Route,
+  Routes,
+  useLocation,
+  useParams,
+} from 'react-router-dom';
 import { getMovieDetails } from 'services/api';
 import Cast from 'pages/Cast/Cast';
 import Reviews from 'pages/Reviews/Reviews';
@@ -11,6 +18,8 @@ const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState(null);
   const [isLoading, setIsloading] = useState(false);
   const { movieId } = useParams();
+  const location = useLocation();
+  const backLink = useRef(location.state?.from ?? '/');
 
   useEffect(() => {
     if (!movieId) return;
@@ -32,7 +41,7 @@ const MovieDetails = () => {
   return (
     <div className={css.container}>
       {isLoading && <Loader />}
-      <Link className={css.goBackBtn} to="/">
+      <Link className={css.goBackBtn} to={backLink.current}>
         Go back
       </Link>
       {movieDetails !== null && (
