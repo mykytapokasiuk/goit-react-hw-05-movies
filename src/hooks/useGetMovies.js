@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { getMovies } from 'services/api';
+import { checkResponse, onError, onInputEmpty } from 'services/utils';
 
 const useGetMovies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -14,16 +15,25 @@ const useGetMovies = () => {
     const fetchMovies = async () => {
       try {
         setIsloading(true);
-        const { results } = await getMovies(searchTerm);
-        setMovies(results);
+        const response = await getMovies(searchTerm);
+        checkResponse(response, setSearchParams);
+        setMovies(response.results);
       } catch (error) {
-        console.log(error.message);
+        onError(error.message);
       } finally {
         setIsloading(false);
       }
     };
     fetchMovies();
-  }, [searchTerm]);
+  }, [searchTerm, setSearchParams]);
+
+  const onSubmit = input => {
+    if (!input) {
+      onInputEmpty();
+      return false;
+    }
+    return true;
+  };
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -32,8 +42,8 @@ const useGetMovies = () => {
     setSearchParams({
       query: searchValue,
     });
-    //   const isSuccess = onSubmit(searchQuery);
-    //   if (isSuccess) form_element.reset();
+    const isSuccess = onSubmit(searchValue);
+    if (isSuccess) form_element.reset();
   };
 
   return { movies, isLoading, location, handleSubmit };

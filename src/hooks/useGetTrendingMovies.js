@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getTrendingMovies } from 'services/api';
+import { onError } from 'services/utils';
 
 const useGetTrendingMovies = () => {
   const [movies, setMovies] = useState([]);
@@ -12,7 +13,7 @@ const useGetTrendingMovies = () => {
         const response = await getTrendingMovies();
         setMovies(response.results);
       } catch (error) {
-        console.log(error.message);
+        onError(error.message);
       } finally {
         setIsloading(false);
       }

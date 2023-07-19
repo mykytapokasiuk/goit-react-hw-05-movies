@@ -36,9 +36,9 @@ const MovieDetails = () => {
                 <span className={css.details}>Rating</span>
                 {movieDetails.vote_average}
               </p>
-              <p className={css.detailsOverview}>
-                <span className={css.details}>Overview</span>
-                {movieDetails.overview}
+              <p className={css.detailsReleaseDate}>
+                <span className={css.details}>Release date</span>
+                {movieDetails.release_date}
               </p>
               <ul className={css.detailsGenres}>
                 <span className={css.details}>Genres</span>
@@ -46,13 +46,14 @@ const MovieDetails = () => {
                   return <li key={item.id}>{item.name}</li>;
                 })}
               </ul>
+
+              <p className={css.detailsOverview}>
+                <span className={css.details}>Overview</span>
+                {movieDetails.overview}
+              </p>
               <p className={css.detailsBudget}>
                 <span className={css.details}>Budget</span>
-                {movieDetails.budget} $
-              </p>
-              <p className={css.detailsReleaseDate}>
-                <span className={css.details}>Release date</span>
-                {movieDetails.release_date}
+                {movieDetails.budget}$
               </p>
             </div>
           </div>

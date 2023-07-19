@@ -18,8 +18,6 @@ const Movies = () => {
           autoComplete="off"
           placeholder="Search movies..."
           className={css.input}
-          required
-          minLength={2}
         />
         <button type="submit" className={css.submitBtn}>
           Search

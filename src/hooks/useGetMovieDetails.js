@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { getMovieDetails } from 'services/api';
+import { onError } from 'services/utils';
 
 const useGetMovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState(null);
@@ -17,7 +18,7 @@ const useGetMovieDetails = () => {
         const response = await getMovieDetails(movieId);
         setMovieDetails(response);
       } catch (error) {
-        console.log(error.message);
+        onError(error.message);
       } finally {
         setIsloading(false);
       }
