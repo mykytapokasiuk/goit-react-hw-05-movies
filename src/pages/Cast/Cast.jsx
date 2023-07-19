@@ -1,31 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { getMovieCredits } from 'services/api';
+import React from 'react';
 import Loader from 'components/Loader/Loader';
+import useGetMovieCredits from 'hooks/useGetMovieCredits';
 import no_photo from '../../images/no_photo.jpg';
 import css from './Cast.module.css';
 
 const Cast = () => {
-  const [movieCredits, setMovieCredits] = useState([]);
-  const [isLoading, setIsloading] = useState(false);
-  const { movieId } = useParams();
-
-  useEffect(() => {
-    if (!movieId) return;
-    const fetchMovieCredits = async () => {
-      try {
-        setIsloading(true);
-        const response = await getMovieCredits(movieId);
-        setMovieCredits(response.cast);
-      } catch (error) {
-        console.log(error.message);
-      } finally {
-        setIsloading(false);
-      }
-    };
-
-    fetchMovieCredits();
-  }, [movieId]);
+  const { movieCredits, isLoading } = useGetMovieCredits();
 
   return (
     <div className={css.container}>

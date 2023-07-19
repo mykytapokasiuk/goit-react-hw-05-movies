@@ -1,42 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react';
-import {
-  Link,
-  NavLink,
-  Route,
-  Routes,
-  useLocation,
-  useParams,
-} from 'react-router-dom';
-import { getMovieDetails } from 'services/api';
-import Cast from 'pages/Cast/Cast';
-import Reviews from 'pages/Reviews/Reviews';
+import React, { Suspense, lazy } from 'react';
+import { Link, NavLink, Route, Routes } from 'react-router-dom';
 import Loader from 'components/Loader/Loader';
+import useGetMovieDetails from 'hooks/useGetMovieDetails';
 import coming_soon from '../../images/coming_soon.jpg';
 import css from './MovieDetails.module.css';
 
+const Cast = lazy(() => import('pages/Cast/Cast'));
+const Reviews = lazy(() => import('pages/Reviews/Reviews'));
+
 const MovieDetails = () => {
-  const [movieDetails, setMovieDetails] = useState(null);
-  const [isLoading, setIsloading] = useState(false);
-  const { movieId } = useParams();
-  const location = useLocation();
-  const backLink = useRef(location.state?.from ?? '/');
-
-  useEffect(() => {
-    if (!movieId) return;
-    const fetchMovieDetails = async () => {
-      try {
-        setIsloading(true);
-        const response = await getMovieDetails(movieId);
-        setMovieDetails(response);
-      } catch (error) {
-        console.log(error.message);
-      } finally {
-        setIsloading(false);
-      }
-    };
-
-    fetchMovieDetails();
-  }, [movieId]);
+  const { movieDetails, isLoading, backLink } = useGetMovieDetails();
 
   return (
     <div className={css.container}>
@@ -94,10 +67,12 @@ const MovieDetails = () => {
               </NavLink>
             </div>
           </div>
-          <Routes>
-            <Route path="cast" element={<Cast />} />
-            <Route path="reviews" element={<Reviews />} />
-          </Routes>
+          <Suspense fallback={<Loader />}>
+            <Routes>
+              <Route path="cast" element={<Cast />} />
+              <Route path="reviews" element={<Reviews />} />
+            </Routes>
+          </Suspense>
         </div>
       )}
     </div>

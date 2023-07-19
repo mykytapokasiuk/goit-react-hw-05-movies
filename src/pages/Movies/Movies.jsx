@@ -1,43 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import Loader from 'components/Loader/Loader';
-import { getMovies } from 'services/api';
 import coming_soon from '../../images/coming_soon.jpg';
 import css from './Movies.module.css';
+import useGetMovies from 'hooks/useGetMovies';
 
 const Movies = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [movies, setMovies] = useState([]);
-  const [isLoading, setIsloading] = useState(false);
-  const searchTerm = searchParams.get('query');
-  const location = useLocation();
-
-  useEffect(() => {
-    if (!searchTerm) return;
-    const fetchMovies = async () => {
-      try {
-        setIsloading(true);
-        const { results } = await getMovies(searchTerm);
-        setMovies(results);
-      } catch (error) {
-        console.log(error.message);
-      } finally {
-        setIsloading(false);
-      }
-    };
-    fetchMovies();
-  }, [searchTerm]);
-
-  const handleSubmit = event => {
-    event.preventDefault();
-    const form_element = event.currentTarget;
-    const searchValue = form_element.elements.searchQuery.value.trim();
-    setSearchParams({
-      query: searchValue,
-    });
-    // const isSuccess = onSubmit(searchQuery);
-    // if (isSuccess) form_element.reset();
-  };
+  const { movies, isLoading, location, handleSubmit } = useGetMovies();
 
   return (
     <div className={css.container}>
