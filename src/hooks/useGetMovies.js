@@ -17,11 +17,7 @@ const useGetMovies = () => {
         setIsloading(true);
         const response = await getMovies(searchTerm);
         setMovies(response.results);
-        const isSuccess = notifications.checkResponse(response);
-        if (isSuccess) return;
-        setSearchParams({
-          query: '',
-        });
+        notifications.checkResponse(response, setSearchParams);
       } catch (error) {
         notifications.onError(error.message);
       } finally {

@@ -8,7 +8,9 @@ const useGetMovieDetails = () => {
   const [isLoading, setIsloading] = useState(false);
   const { movieId } = useParams();
   const location = useLocation();
+  console.log(location);
   const backLink = useRef(location.state?.from ?? '/');
+  console.log(backLink);
 
   useEffect(() => {
     if (!movieId) return;

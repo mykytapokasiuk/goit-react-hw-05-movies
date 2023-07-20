@@ -46,7 +46,7 @@ export const onInputEmpty = () => {
  *@function checkResponse
  * @param {promise} response
  */
-export const checkResponse = response => {
+export const checkResponse = (response, setSearch) => {
   if (response.total_results === 0) {
     Notify.failure(
       'Sorry, there are no movies matching your search query. Please try again.',
@@ -60,6 +60,9 @@ export const checkResponse = response => {
         cssAnimationStyle: 'from-top',
       }
     );
-    return false;
+    setSearch({
+      query: '',
+    });
+    return;
   }
 };
