@@ -12,7 +12,7 @@
     background-color: rgb(194, 180, 163);
     border: none;
     border-radius: 3px;
-    font-size: 18px;
+    font-size: 16px;
     letter-spacing: 0.03em;
     box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.75);
@@ -31,7 +31,7 @@
 }
 
 .submitBtn {
-    padding: 2px 10px;
+    padding: 2px 8px;
     color: #ffffff;
     font-family: system-ui, -apple-system,
         BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,

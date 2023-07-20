@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { getMovies } from 'services/api';
-import { checkResponse, onError, onInputEmpty } from 'services/utils';
+import * as notifications from 'services/utils';
 
 const useGetMovies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -16,10 +16,14 @@ const useGetMovies = () => {
       try {
         setIsloading(true);
         const response = await getMovies(searchTerm);
-        checkResponse(response, setSearchParams);
         setMovies(response.results);
+        const isSuccess = notifications.checkResponse(response);
+        if (isSuccess) return;
+        setSearchParams({
+          query: '',
+        });
       } catch (error) {
-        onError(error.message);
+        notifications.onError(error.message);
       } finally {
         setIsloading(false);
       }
@@ -29,7 +33,7 @@ const useGetMovies = () => {
 
   const onSubmit = input => {
     if (!input) {
-      onInputEmpty();
+      notifications.onInputEmpty();
       return false;
     }
     return true;

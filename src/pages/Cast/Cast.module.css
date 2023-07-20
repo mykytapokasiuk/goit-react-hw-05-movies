@@ -15,12 +15,8 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 15px;
-    max-width: 1150px;
-}
-
-.castListItem {
-    width: calc((1090px) / 5);
+    gap: 20px;
+    max-width: 1080px;
 }
 
 .castItemImg {

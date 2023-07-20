@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import Loader from 'components/Loader/Loader';
+import coming_soon from '../../images/coming_soon.jpg';
 import css from './HomePage.module.css';
 import useGetTrendingMovies from 'hooks/useGetTrendingMovies';
 
@@ -17,7 +18,11 @@ const HomePage = () => {
               <Link to={`/movies/${movie.id}`}>
                 <img
                   className={css.poster}
-                  src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
+                  src={
+                    movie.poster_path
+                      ? `https://image.tmdb.org/t/p/w200/${movie.poster_path}`
+                      : coming_soon
+                  }
                   alt={movie.title}
                 />
                 <p className={css.movieTitle}>{movie.title}</p>

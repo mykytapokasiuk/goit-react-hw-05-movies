@@ -15,7 +15,7 @@ const Cast = () => {
         {movieCredits.length > 0 &&
           movieCredits.slice(0, 10).map(actor => {
             return (
-              <li key={actor.id} className={css.castListItem}>
+              <li key={actor.id}>
                 <img
                   className={css.castItemImg}
                   src={
